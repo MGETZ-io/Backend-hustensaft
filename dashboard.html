@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Hustensaft Dashboard</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', sans-serif; background: #121212; color: white; 
+            margin: 0; display: flex; flex-direction: column; min-height: 100vh; 
+        }
+
+        /* Header Bereich */
+        .navbar { 
+            background: #1e1e1e; padding: 1rem 2rem; display: flex; 
+            justify-content: space-between; align-items: center;
+            border-bottom: 2px solid #333; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .user-info { display: flex; align-items: center; gap: 15px; }
+        .project-badge { background: #007bff; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; }
+        .logout-btn { background: #dc3545; border: none; color: white; padding: 8px 15px; border-radius: 6px; cursor: pointer; }
+
+        /* Main Content */
+        .container { padding: 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1200px; margin: auto; }
+        
+        .card { 
+            background: #1e1e1e; padding: 1.5rem; border-radius: 12px; 
+            border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        h2 { margin-top: 0; color: #007bff; border-bottom: 1px solid #333; padding-bottom: 10px; }
+
+        /* Listen & Management */
+        .item-list { list-style: none; padding: 0; }
+        .item-list li { 
+            background: #252525; margin-bottom: 8px; padding: 10px; 
+            border-radius: 6px; display: flex; justify-content: space-between; align-items: center;
+        }
+        .json-output { 
+            width: 100%; height: 150px; background: #000; color: #0f0; 
+            font-family: monospace; padding: 10px; border-radius: 6px; border: 1px solid #333; font-size: 0.8rem;
+        }
+        
+        .btn-action { background: #28a745; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; }
+    </style>
+    <script>
+        // Sicherheits-Check: Sofort prüfen, ob Session existiert
+        const session = JSON.parse(localStorage.getItem('hustensaft_auth'));
+        if (!session) {
+            window.location.href = 'index.html';
+        }
+
+        function logout() {
+            localStorage.removeItem('hustensaft_auth');
+            window.location.href = 'index.html';
+        }
+
+        // Beispiel-Funktion zum Generieren der neuen JSON (für dich als Admin)
+        async function loadManagement() {
+            try {
+                const authRes = await fetch('./api/apiv2/secret/login/auth.json');
+                const authData = await authRes.json();
+                document.getElementById('jsonPreview').value = JSON.stringify(authData, null, 2);
+                
+                const list = document.getElementById('userList');
+                authData.users.forEach(u => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${u.vorname} ${u.nachname} (${u.username})</span> <span class="project-badge">ID: ${u.orgId}</span>`;
+                    list.appendChild(li);
+                });
+            } catch (e) {
+                console.log("Konnte Daten für Management nicht laden.");
+            }
+        }
+    </script>
+</head>
+<body onload="loadManagement()">
+
+    <nav class="navbar">
+        <div class="user-info">
+            <span style="font-weight: bold; font-size: 1.2rem;">Hustensaft Backend</span>
+            <span class="project-badge" id="displayProject">Projekt</span>
+            <span id="displayUser">Name</span>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+    </nav>
+
+    <div class="container">
+        <div class="card" style="grid-column: span 2;">
+            <h2>Willkommen zurück!</h2>
+            <p>Du bist erfolgreich im Backend-System angemeldet. Hier kannst du die Projekte und Mitarbeiter einsehen.</p>
+        </div>
+
+        <div class="card">
+            <h2>Aktive Mitarbeiter</h2>
+            <ul class="item-list" id="userList">
+                </ul>
+        </div>
+
+        <div class="card">
+            <h2>JSON Generator / Backup</h2>
+            <p style="font-size: 0.8rem; color: #888;">Hier siehst du den aktuellen Inhalt deiner auth.json:</p>
+            <textarea id="jsonPreview" class="json-output" readonly></textarea>
+            <p style="font-size: 0.7rem;">Um Änderungen zu speichern, musst du die Datei im GitHub Repository bearbeiten.</p>
+        </div>
+    </div>
+
+    <script>
+        // Daten aus Session anzeigen
+        document.getElementById('displayUser').innerText = session.name;
+        document.getElementById('displayProject').innerText = session.project;
+    </script>
+
+</body>
+</html>

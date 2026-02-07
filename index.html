@@ -50,7 +50,7 @@
 
                 if (user) {
                     const orgRes = await fetch(`${API_BASE}/organisation.json`);
-                    const orgData = await orgRes.json();
+                    const orgData = await organisation.json();
                     
                     localStorage.setItem('hustensaft_session', JSON.stringify({
                         name: user.vorname + " " + user.nachname,

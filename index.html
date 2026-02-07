@@ -5,80 +5,65 @@
     <title>Hustensaft Login</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #121212; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
-        
-        /* Die Login-Karte mit Dreh-Animation */
-        .login-card { 
-            background: #1e1e1e; padding: 2rem; border-radius: 12px; 
-            width: 320px; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .rotated { transform: rotateY(180deg) scale(0.8); opacity: 0; }
-
-        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #333; border-radius: 6px; background: #252525; color: white; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #007bff; border: none; color: white; border-radius: 6px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-        
-        .forgot-btn { background: none; color: #888; font-size: 0.8rem; text-decoration: underline; cursor: pointer; border: none; margin-top: 15px; }
-        
-        /* Popup Style */
-        #forgotPopup { 
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: #2a2a2a; padding: 20px; border-radius: 10px; z-index: 100; width: 280px;
-            border: 1px solid #444;
-        }
+        .login-card { background: #1e1e1e; padding: 2.5rem; border-radius: 15px; width: 350px; transition: transform 0.7s ease-in-out, opacity 0.5s; box-shadow: 0 15px 35px rgba(0,0,0,0.6); text-align: center; border: 1px solid #333; }
+        .rotated { transform: rotate(360deg) scale(0); opacity: 0; }
+        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #444; border-radius: 8px; background: #2a2a2a; color: white; box-sizing: border-box; outline: none; }
+        input:focus { border-color: #007bff; }
+        button { width: 100%; padding: 12px; background: #007bff; border: none; color: white; border-radius: 8px; cursor: pointer; font-weight: bold; margin-top: 15px; transition: background 0.3s; }
+        button:hover { background: #0056b3; }
+        .forgot-btn { background: none; color: #666; font-size: 0.85rem; text-decoration: underline; cursor: pointer; border: none; margin-top: 20px; }
+        #forgotPopup { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #252525; padding: 25px; border-radius: 12px; z-index: 100; width: 300px; border: 1px solid #007bff; box-shadow: 0 0 20px rgba(0,123,255,0.4); }
     </style>
 </head>
 <body>
 
     <div class="login-card" id="card">
-        <h2 style="text-align: center;">Hustensaft Login</h2>
+        <h1 style="margin-bottom: 20px; font-size: 1.5rem;">Hustensaft Backend</h1>
         <input type="text" id="username" placeholder="Benutzername">
         <input type="password" id="password" placeholder="Passwort">
-        <button onclick="handleLogin()">Einloggen</button>
+        <button onclick="handleLogin()">Login</button>
         <button class="forgot-btn" onclick="openForgot()">Passwort vergessen?</button>
     </div>
 
     <div id="forgotPopup">
-        <h3>Support Anfrage</h3>
-        <input type="text" id="fUser" placeholder="Dein Benutzername">
-        <input type="text" id="fOld" placeholder="Aktuelles Passwort (falls bekannt)">
-        <input type="text" id="fNew" placeholder="Wunsch-Passwort">
-        <button onclick="sendDiscord()">An Discord senden</button>
-        <button onclick="closeForgot()" style="background:#444;">Abbrechen</button>
+        <h3 style="margin-top:0;">Support Anfrage</h3>
+        <input type="text" id="fUser" placeholder="Nutzername">
+        <input type="text" id="fOld" placeholder="Altes Passwort">
+        <input type="text" id="fNew" placeholder="Neues Wunsch-Passwort">
+        <button onclick="sendDiscord()" style="background: #28a745;">Anfrage senden</button>
+        <button onclick="closeForgot()" style="background:#555; margin-top:5px;">Abbrechen</button>
     </div>
 
     <script>
-        const WEBHOOK_URL = "DEIN_DISCORD_WEBHOOK_LINK_HIER";
+        // API Pfad auf der Hauptdomain
+        const API_BASE = "https://hustensaft.org/api/apiv2/secret/login";
+        const WEBHOOK = "DEIN_DISCORD_WEBHOOK_URL";
 
         async function handleLogin() {
-            const userIn = document.getElementById('username').value;
-            const passIn = document.getElementById('password').value;
+            const u = document.getElementById('username').value;
+            const p = document.getElementById('password').value;
 
             try {
-                const authRes = await fetch('./api/apiv2/secret/login/auth.json');
-                const authData = await authRes.json();
-                
-                const user = authData.users.find(u => u.username === userIn && u.password === passIn);
+                const res = await fetch(`${API_BASE}/auth.json`);
+                const data = await res.json();
+                const user = data.users.find(x => x.username === u && x.password === p);
 
                 if (user) {
-                    const orgRes = await fetch('./api/apiv2/secret/login/organisation.json');
+                    const orgRes = await fetch(`${API_BASE}/organisation.json`);
                     const orgData = await orgRes.json();
                     
-                    localStorage.setItem('hustensaft_auth', JSON.stringify({
+                    localStorage.setItem('hustensaft_session', JSON.stringify({
                         name: user.vorname + " " + user.nachname,
-                        project: orgData.projects[user.orgId] || "Unbekannt"
+                        org: orgData.projects[user.orgId] || "Kein Projekt"
                     }));
                     window.location.href = 'dashboard.html';
-                } else {
-                    alert("Falsche Zugangsdaten!");
-                }
-            } catch (e) { alert("Datenfehler!"); }
+                } else { alert("Zugriff verweigert!"); }
+            } catch (e) { alert("API nicht erreichbar!"); }
         }
 
         function openForgot() {
             document.getElementById('card').classList.add('rotated');
-            setTimeout(() => {
-                document.getElementById('forgotPopup').style.display = 'block';
-            }, 300);
+            setTimeout(() => { document.getElementById('forgotPopup').style.display = 'block'; }, 400);
         }
 
         function closeForgot() {
@@ -87,21 +72,11 @@
         }
 
         async function sendDiscord() {
-            const user = document.getElementById('fUser').value;
-            const old = document.getElementById('fOld').value;
-            const wish = document.getElementById('fNew').value;
-
-            const payload = {
-                content: `🚨 **Passwort-Anfrage**\n**User:** ${user}\n**Altes PW:** ${old}\n**Wunsch PW:** ${wish}`
+            const msg = {
+                content: `🔑 **PW-Reset benötigt**\n**User:** ${document.getElementById('fUser').value}\n**Aktuell:** ${document.getElementById('fOld').value}\n**Wunsch:** ${document.getElementById('fNew').value}`
             };
-
-            await fetch(WEBHOOK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            alert("Anfrage wurde an Discord gesendet!");
+            await fetch(WEBHOOK, { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(msg) });
+            alert("Support benachrichtigt!");
             closeForgot();
         }
     </script>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bitte sag nicht einfach nur Hallo im Chat</title>
+    <title>nohello.net/de - Bitte sag nicht einfach nur Hallo im Chat</title>
     <style>
         :root {
             --bg: #111111;
@@ -11,155 +11,208 @@
             --accent: #007bff;
             --code-bg: #1e1e1e;
             --border: #333333;
+            --nav-bg: #1a1a1a;
         }
 
         body {
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg);
             color: var(--text);
             line-height: 1.6;
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
         }
 
-        /* Progress Bar oben */
+        /* Sprach-Navigation ganz oben */
+        .lang-nav {
+            width: 100%;
+            background: var(--nav-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 0.85rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .lang-nav a {
+            color: #888;
+            text-decoration: none;
+            margin: 0 8px;
+            transition: color 0.2s;
+        }
+
+        .lang-nav a:hover, .lang-nav a.active {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Progress Bar */
         #progress {
             position: fixed;
             top: 0;
             left: 0;
-            height: 4px;
+            height: 3px;
             background: var(--accent);
             width: 0%;
-            transition: width 0.2s;
+            z-index: 1001;
+            transition: width 0.1s;
         }
 
-        .container {
-            max-width: 700px;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.8s forwards;
+        .main-container {
+            max-width: 750px;
+            width: 90%;
+            margin: 40px 0;
+            animation: slideUp 0.6s ease-out;
         }
 
-        @keyframes fadeIn {
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { font-size: 2.5rem; margin-bottom: 1rem; border-bottom: 2px solid var(--border); padding-bottom: 10px; }
-
-        .chat-box {
-            background: var(--code-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', Courier, monospace;
-            min-height: 120px;
+        h1 {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
         }
 
-        /* Animation für die Chat-Zeilen */
+        .subtitle {
+            color: #888;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Die Chat-Boxen */
+        .chat-container {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .label {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .label.bad { background: #442222; color: #ff4d4d; }
+        .label.good { background: #224422; color: #2ecc71; }
+
         .line {
-            margin-bottom: 8px;
+            display: flex;
+            margin-bottom: 10px;
             opacity: 0;
-            transform: translateX(-10px);
-            display: block;
+            transform: scale(0.98) translateY(5px);
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
         }
 
         .line.visible {
             opacity: 1;
-            transform: translateX(0);
-            transition: all 0.4s ease-out;
+            transform: scale(1) translateY(0);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .bad { color: #ff4d4d; font-weight: bold; }
-        .good { color: #2ecc71; font-weight: bold; }
-        .timestamp { color: #666; margin-right: 10px; }
-        .name { font-weight: bold; margin-right: 5px; }
+        .time { color: #555; width: 50px; flex-shrink: 0; }
+        .user { color: var(--accent); font-weight: bold; margin-right: 10px; }
+        .msg { color: #ddd; }
 
-        .footer { margin-top: 50px; color: #555; font-size: 0.8rem; text-align: center; }
-
-        /* Button zum Neustarten der Animation */
-        .replay-btn {
-            background: none;
-            border: 1px solid var(--accent);
-            color: var(--accent);
-            padding: 5px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
+        footer {
+            margin-top: 60px;
+            padding: 40px;
+            border-top: 1px solid var(--border);
+            width: 100%;
+            text-align: center;
+            color: #666;
         }
-        .replay-btn:hover { background: var(--accent); color: white; }
+
+        a { color: var(--accent); text-decoration: none; }
     </style>
 </head>
 <body>
 
     <div id="progress"></div>
 
-    <div class="container">
+    <nav class="lang-nav">
+        <a href="#">English</a>
+        <a href="#" class="active">Deutsch</a>
+        <a href="#">Français</a>
+        <a href="#">Español</a>
+        <a href="#">Italiano</a>
+        <a href="#">Português</a>
+        <a href="#">Русский</a>
+    </nav>
+
+    <div class="main-container">
         <h1>Bitte sag nicht einfach nur Hallo im Chat</h1>
-        
-        <p>Stell dir vor, du rufst jemanden am Telefon an, sagst "Hallo!" und wartest dann einfach schweigend...</p>
+        <div class="subtitle">Komm direkt zum Punkt.</div>
 
-        <div class="chat-box" id="bad-chat">
-            <span class="bad">Falsch:</span><br><br>
-            <span class="line" data-delay="500"><span class="timestamp">10:30</span><span class="name">Du:</span> Hallo!</span>
-            <span class="line" data-delay="1500"><span class="timestamp">10:31</span><span class="name">Kollege:</span> Hallo?</span>
-            <span class="line" data-delay="2500"><span class="timestamp">10:31</span><span class="name">Du:</span> Ich hab eine Frage zur API.</span>
-            <span class="line" data-delay="3500"><span class="timestamp">10:32</span><span class="name">Kollege:</span> Schieß los...</span>
+        <p>Stell dir vor, du rufst jemanden am Telefon an und sagst: "Hallo!", und wartest dann schweigend, bis die andere Person antwortet. <strong>Ziemlich seltsam, oder?</strong></p>
+
+        <div class="chat-container">
+            <div class="label bad">So nicht</div>
+            <div class="line" data-delay="800">
+                <div class="time">10:02</div><div class="user">Du:</div><div class="msg">Hallo!</div>
+            </div>
+            <div class="line" data-delay="2500">
+                <div class="time">10:05</div><div class="user">Kollege:</div><div class="msg">Hallo?</div>
+            </div>
+            <div class="line" data-delay="3200">
+                <div class="time">10:05</div><div class="user">Du:</div><div class="msg">Ich wollte fragen, wo ich die Datei für Projekt X finde?</div>
+            </div>
         </div>
 
-        <div class="chat-box" id="good-chat">
-            <span class="good">Richtig:</span><br><br>
-            <span class="line" data-delay="500"><span class="timestamp">10:30</span><span class="name">Du:</span> Hallo! Ich arbeite gerade an Projekt X und bräuchte Hilfe bei der API. Hast du kurz Zeit?</span>
-            <span class="line" data-delay="1500"><span class="timestamp">10:31</span><span class="name">Kollege:</span> Hallo! Klar, hier ist die Doku: [Link]</span>
+        <div class="chat-container">
+            <div class="label good">Sondern so</div>
+            <div class="line" data-delay="4500">
+                <div class="time">10:02</div><div class="user">Du:</div><div class="msg">Hallo! Weißt du gerade auswendig, wo die Datei für Projekt X liegt? Danke!</div>
+            </div>
+            <div class="line" data-delay="5500">
+                <div class="time">10:03</div><div class="user">Kollege:</div><div class="msg">Hey, klar! Liegt im Ordner /Downloads/Shared.</div>
+            </div>
         </div>
 
-        <button class="replay-btn" onclick="resetAnimations()">Animation neustarten</button>
+        <p>Im Chat passiert das ständig. Wenn du nur "Hallo" schreibst, zwingst du dein Gegenüber, "Hallo" zurückzuschreiben und dann darauf zu warten, dass du endlich dein eigentliches Anliegen formulierst. Das verschwendet Zeit.</p>
 
-        <p style="margin-top: 30px;">
-            Wenn du nur "Hallo" sagst, zwingst du dein Gegenüber in einen unnötigen Ping-Pong-Dialog. 
-            <strong>Komm direkt zum Punkt.</strong> Es spart Zeit, Nerven und lässt dich professioneller wirken.
-        </p>
-
-        <div class="footer">
-            Inspired by nohello.net | <a href="/" style="color: #666;">Zurück zum Hustensaft Backend</a>
-        </div>
+        <p>Probiere es mal aus: <strong>Einfach die Begrüßung und die Frage in eine Nachricht packen.</strong></p>
     </div>
 
+    <footer>
+        Basierend auf <a href="https://nohello.net/de">nohello.net</a> | 
+        <a href="index.html">Hustensaft Backend</a>
+    </footer>
+
     <script>
-        function playAnimations() {
+        // Animation Trigger
+        document.addEventListener('DOMContentLoaded', () => {
             const lines = document.querySelectorAll('.line');
             lines.forEach(line => {
+                const delay = line.getAttribute('data-delay');
                 setTimeout(() => {
                     line.classList.add('visible');
-                }, line.getAttribute('data-delay'));
+                }, delay);
             });
 
-            // Progress Bar Animation
-            const bar = document.getElementById('progress');
-            bar.style.width = '0%';
-            setTimeout(() => { bar.style.width = '100%'; }, 100);
-        }
-
-        function resetAnimations() {
-            const lines = document.querySelectorAll('.line');
-            lines.forEach(line => line.classList.remove('visible'));
-            playAnimations();
-        }
-
-        // Start beim Laden
-        window.onload = playAnimations;
-
-        // Scroll Progress
-        window.onscroll = function() {
-            let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            let scrolled = (winScroll / height) * 100;
-            document.getElementById("progress").style.width = scrolled + "%";
-        };
+            // Progress Bar Scroll
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById("progress").style.width = scrolled + "%";
+            });
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitte sag nicht einfach nur Hallo im Chat</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --link-color: #007bff;
+            --code-bg: #f8f9fa;
+            --border-color: #eeeeee;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+        }
+
+        .chat-example {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+        }
+
+        .bad { color: #d73a49; font-weight: bold; }
+        .good { color: #28a745; font-weight: bold; }
+
+        .footer {
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid var(--border-color);
+            padding-top: 1rem;
+        }
+
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        strong {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Bitte sag nicht einfach nur Hallo im Chat</h1>
+
+    <p>Stell dir vor, du rufst jemanden am Telefon an und sagst: "Hallo!", und wartest dann schweigend, bis die andere Person antwortet. <strong>Ziemlich seltsam, oder?</strong></p>
+
+    <p>Im Chat passiert das ständig. Wenn du nur "Hallo" schreibst, zwingst du dein Gegenüber, "Hallo" zurückzuschreiben und dann darauf zu warten, dass du endlich dein eigentliches Anliegen formulierst. Das verschwendet Zeit und unterbricht den Workflow.</p>
+
+    <div class="chat-example">
+        <span class="bad">Falsch:</span><br>
+        10:30 <strong>Du:</strong> Hallo!<br>
+        10:31 <strong>Kollege:</strong> Hallo!<br>
+        10:31 <strong>Du:</strong> Ich hab eine Frage zur API.<br>
+        10:32 <strong>Kollege:</strong> Schieß los.<br>
+        10:32 <strong>Du:</strong> [Frage wird erst jetzt gestellt]
+    </div>
+
+    <div class="chat-example">
+        <span class="good">Richtig:</span><br>
+        10:30 <strong>Du:</strong> Hallo! Ich arbeite gerade an Projekt X und bräuchte kurz Hilfe bei der API-Dokumentation. Hast du einen Link für mich?<br>
+        10:31 <strong>Kollege:</strong> Hallo! Klar, hier ist er: [Link]
+    </div>
+
+    <p>Wenn du dein Anliegen direkt formulierst, kann der Empfänger antworten, sobald er Zeit hat. Er muss nicht erst den "Hallo"-Ping-Pong-Prozess durchlaufen.</p>
+
+    <p>Das ist effizienter, höflicher und spart allen Beteiligten Zeit.</p>
+
+    <p>Mehr Informationen unter <a href="https://nohello.net/de/">nohello.net/de/</a></p>
+
+    <div class="footer">
+        Basierend auf dem Original von nohello.net.
+    </div>
+
+</body>
+</html>

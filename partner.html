@@ -4,96 +4,48 @@
     <meta charset="UTF-8">
     <title>Hustensaft Partner Program | Hustensaft</title>
     <style>
-        :root {
-            --hs-yellow: #FFD700; --hs-black: #000000;
-            --discord-blue: #5865F2; --card-bg: #18191c;
-        }
-        body { margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; background-color: var(--hs-black); color: white; }
-        
-        /* Navbar with Language Menu */
-        nav { background: rgba(0,0,0,0.2); padding: 15px 40px; display: flex; justify-content: flex-end; position: absolute; width: 100%; box-sizing: border-box; }
-        select { background: transparent; color: white; border: 1px solid white; padding: 5px; border-radius: 4px; cursor: pointer; }
-        option { background: var(--hs-black); }
-
-        .hero { background-color: var(--discord-blue); padding: 120px 20px; text-align: center; border-bottom: 8px solid var(--hs-yellow); }
-        .hero h1 { font-size: 3.5rem; margin: 0; font-weight: 800; text-transform: uppercase; }
-
-        .content { max-width: 900px; margin: 60px auto; padding: 0 20px; }
-        
-        /* Discord Styled Disabled Box */
-        .status-box { background: var(--card-bg); border-radius: 8px; padding: 40px; text-align: center; border: 1px solid #333; }
-        .status-box.disabled { opacity: 0.6; }
-        .status-box p { color: #b9bbbe; margin-bottom: 25px; font-size: 1.1rem; }
-        
-        .btn { display: inline-block; padding: 16px 32px; border-radius: 3px; font-weight: 600; text-decoration: none; text-transform: uppercase; }
-        .btn-active { background-color: var(--hs-yellow); color: var(--hs-black); }
-        .btn-locked { background-color: #4f545c; color: #dcddde; cursor: not-allowed; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 50px; }
-        .card { background: var(--card-bg); padding: 25px; border-radius: 8px; border-left: 4px solid var(--hs-yellow); }
+        :root { --blue: #5865F2; --yellow: #FFD700; --black: #000000; --muted: #B9BBBE; }
+        body { margin: 0; background: var(--black); color: white; font-family: 'Helvetica Neue', Arial, sans-serif; display: flex; flex-direction: column; align-items: center; }
+        nav { width: 100%; max-width: 1100px; padding: 24px; display: flex; justify-content: flex-end; box-sizing: border-box; }
+        select { background: transparent; color: white; border: 1px solid #333; padding: 8px; border-radius: 4px; }
+        .hero { text-align: center; padding: 80px 24px; max-width: 800px; }
+        .hero h1 { font-size: 56px; color: var(--blue); font-weight: 800; margin: 0 0 24px; text-transform: uppercase; }
+        .hero p { font-size: 20px; color: white; line-height: 1.4; }
+        .content { width: 100%; max-width: 800px; padding: 0 24px; }
+        .card { background: #0f0f0f; border: 1px solid #222; border-radius: 8px; padding: 60px 40px; text-align: center; }
+        .card.disabled { opacity: 0.5; }
+        .card h2 { font-size: 28px; margin-bottom: 16px; color: var(--yellow); }
+        .card p { color: var(--muted); margin-bottom: 32px; font-size: 16px; }
+        .btn { display: inline-block; padding: 16px 32px; border-radius: 28px; font-weight: 600; text-decoration: none; }
+        .btn-active { background: var(--yellow); color: var(--black); }
+        .btn-disabled { background: #4f545c; color: #dcddde; cursor: not-allowed; }
     </style>
 </head>
 <body>
-
-<nav>
-    <select id="langSwitch" onchange="changeLanguage(this.value)">
-        <option value="en">English</option>
-        <option value="de">Deutsch</option>
-        <option value="es">Español</option>
-        <option value="ru">Русский</option>
-    </select>
-</nav>
-
-<section class="hero">
-    <h1 id="title">PARTNER PROGRAM</h1>
-    <p id="hero-desc"></p>
-</section>
-
-<div class="content">
-    <div id="apply-card" class="status-box">
-        <p id="status-msg"></p>
-        <div id="btn-container"></div>
-    </div>
-
-    <div class="grid" id="list-container"></div>
-</div>
-
-<script>
-    let currentData = {};
-
-    function updateUI(lang) {
-        const t = currentData.translations[lang] || currentData.translations['en'];
-        const prog = currentData.partnerProgram;
-        
-        document.getElementById('title').innerText = t.partnerTitle;
-        document.getElementById('hero-desc').innerText = t.partnerDesc;
-        document.getElementById('status-msg').innerText = t.closedMsg;
-        
-        const btnBox = document.getElementById('btn-container');
-        const card = document.getElementById('apply-card');
-
-        if(prog.applyOpen) {
-            card.classList.remove('disabled');
-            btnBox.innerHTML = `<a href="#" class="btn btn-active">${t.applyBtn}</a>`;
-            document.getElementById('status-msg').style.display = 'none';
-        } else {
-            card.classList.add('disabled');
-            btnBox.innerHTML = `<div class="btn btn-locked">${t.closedBtn}</div>`;
+    <nav><select id="l" onchange="up(this.value)"><option value="en">English</option><option value="de">Deutsch</option></select></nav>
+    <div class="hero"><h1 id="h1"></h1><p id="hp"></p></div>
+    <div class="content"><div id="c" class="card"><h2 id="ch"></h2><p id="cp"></p><div id="b"></div></div></div>
+    <script>
+        let d;
+        async function up(lang) {
+            if(!d) d = (await (await fetch('config.json')).json()).partnerProgram;
+            const t = d[lang];
+            document.getElementById('h1').innerText = t.title;
+            document.getElementById('hp').innerText = t.hero;
+            const btn = document.getElementById('b');
+            if(!d.applyOpen) {
+                document.getElementById('c').classList.add('disabled');
+                document.getElementById('ch').innerText = t.closed_h2;
+                document.getElementById('cp').innerText = t.closed_p;
+                btn.innerHTML = `<div class="btn btn-disabled">${t.btn_paused}</div>`;
+            } else {
+                document.getElementById('c').classList.remove('disabled');
+                document.getElementById('ch').innerText = "Join us";
+                document.getElementById('cp').innerText = "Start your application below.";
+                btn.innerHTML = `<a href="${d.applyLink}" class="btn btn-active">${t.btn_apply}</a>`;
+            }
         }
-    }
-
-    function changeLanguage(lang) {
-        updateUI(lang);
-    }
-
-    fetch('config.json').then(r => r.json()).then(data => {
-        currentData = data;
-        updateUI('en');
-        data.partnerProgram.list.forEach(item => {
-            document.getElementById('list-container').innerHTML += `<div class="card"><strong>${item.name}</strong><br>${item.info}</div>`;
-        });
-    });
-</script>
+        up('en');
+    </script>
 </body>
 </html>
-

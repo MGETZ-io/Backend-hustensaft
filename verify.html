@@ -1,106 +1,59 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hustensaft | Verify & Partner</title>
+    <title>Hustensaft Verify</title>
     <style>
-        body { background-color: #0f0f0f; color: #ffffff; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; padding: 50px; }
-        .container { background: #1a1a1a; padding: 30px; border-radius: 15px; border: 2px solid #7d2ae8; width: 100%; max-width: 500px; box-shadow: 0 0 20px rgba(125, 42, 232, 0.2); }
-        h1 { color: #7d2ae8; text-align: center; }
-        label { display: block; margin: 15px 0 5px; font-weight: bold; }
-        input, textarea { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #333; background: #0b0b0b; color: #fff; box-sizing: border-box; }
-        button { width: 100%; padding: 12px; background: #7d2ae8; border: none; color: white; font-weight: bold; border-radius: 5px; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #964fff; transform: scale(1.02); }
-        button:disabled { background: #444; cursor: not-allowed; }
+        :root { --hs-yellow: #FFD700; --hs-black: #000000; --card-bg: #0a0a0a; }
+        body { margin: 0; font-family: sans-serif; background-color: var(--hs-black); color: white; }
+        nav { background: rgba(0,0,0,0.5); padding: 15px 40px; display: flex; justify-content: flex-end; }
+        select { background: transparent; color: var(--hs-yellow); border: 1px solid var(--hs-yellow); padding: 5px; }
+        .hero { background-color: var(--hs-yellow); padding: 100px 20px; text-align: center; color: var(--hs-black); }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; margin: 0; }
+        .content { max-width: 900px; margin: 60px auto; padding: 0 20px; }
+        .status-box { background: var(--card-bg); border-radius: 8px; padding: 40px; text-align: center; border: 2px solid var(--hs-yellow); }
+        .status-box.disabled { opacity: 0.5; border-color: #333; }
+        .btn { display: inline-block; padding: 16px 32px; border-radius: 4px; font-weight: bold; text-decoration: none; text-transform: uppercase; }
+        .btn-active { background-color: var(--hs-yellow); color: var(--hs-black); }
+        .btn-locked { background-color: #222; color: #555; cursor: not-allowed; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; margin-top: 50px; }
+        .card { background: var(--card-bg); padding: 25px; border-radius: 8px; border: 1px solid #333; }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <h1>🥤 Hustensaft Verify</h1>
-    <p style="text-align: center; font-size: 0.9em; color: #aaa;">Werde offizieller Content Creator im Hustensaft-Netzwerk.</p>
-    
-    <form id="verify-form">
-        <label>Dein Name / Alias</label>
-        <input type="text" name="user_name" placeholder="Wie sollen wir dich nennen?" required>
-
-        <label>E-Mail Adresse</label>
-        <input type="email" name="email" placeholder="Deine E-Mail für die Bestätigung" required>
-
-        <label>Discord ID</label>
-        <input type="text" name="discord_id" placeholder="z.B. hustensaft_king" required>
-
-        <label>YouTube / Content Link</label>
-        <input type="url" name="youtube_channel" placeholder="Link zu deinem Kanal" required>
-
-        <button type="submit" id="submit-btn">Bewerbung absenden</button>
-    </form>
+<nav><select onchange="updateUI(this.value)"><option value="en">English</option><option value="de">Deutsch</option></select></nav>
+<header class="hero"><h1 id="title">VERIFY PROGRAM</h1><p id="hero-desc"></p></header>
+<div class="content">
+    <div id="apply-card" class="status-box">
+        <p id="status-msg"></p>
+        <div id="btn-container"></div>
+    </div>
+    <div class="grid" id="list-container"></div>
 </div>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 <script>
-    (function() {
-        // Dein Public Key aus dem Screenshot
-        emailjs.init("sjE6DBL4JmkGp_Ccl"); 
-    })();
-
-    // TIPP: Erstelle in Discord einen Webhook und füge die URL hier ein
-    const DISCORD_WEBHOOK_URL = "DEINE_WEBHOOK_URL_HIER_EINSETZEN";
-
-    document.getElementById('verify-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const btn = document.getElementById('submit-btn');
-        const originalText = btn.innerText;
-        
-        btn.innerText = "Wird gesendet...";
-        btn.disabled = true;
-
-        // 1. EmailJS senden (An den Bewerber)
-        // Nutzt deinen Service 'service_9ibd1ev' und Template 'template_en23tln'
-        emailjs.sendForm('service_9ibd1ev', 'template_en23tln', this)
-        .then(() => {
-            console.log('E-Mail erfolgreich versendet!');
-            
-            // 2. Discord Webhook senden (Falls URL vorhanden)
-            if (DISCORD_WEBHOOK_URL !== "DEINE_WEBHOOK_URL_HIER_EINSETZEN") {
-                const formData = new FormData(this);
-                const discordMessage = {
-                    embeds: [{
-                        title: "🚀 Neue Verify-Bewerbung",
-                        color: 8202984, 
-                        fields: [
-                            { name: "Creator", value: formData.get('user_name') || "Nicht angegeben", inline: true },
-                            { name: "E-Mail", value: formData.get('email') || "Nicht angegeben", inline: true },
-                            { name: "Discord", value: formData.get('discord_id') || "Nicht angegeben", inline: true },
-                            { name: "YouTube", value: formData.get('youtube_channel') || "Nicht angegeben" }
-                        ],
-                        footer: { text: "Hustensaft Web-Verify System" },
-                        timestamp: new Date()
-                    }]
-                };
-
-                return fetch(DISCORD_WEBHOOK_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(discordMessage)
-                });
-            }
-        })
-        .then(() => {
-            alert('Erfolgreich! Deine Bewerbung wurde gesendet.');
-            document.getElementById('verify-form').reset();
-        })
-        .catch((err) => {
-            console.error('Fehler:', err);
-            alert('Fehler beim Senden: ' + (err.text || JSON.stringify(err)));
-        })
-        .finally(() => {
-            btn.innerText = originalText;
-            btn.disabled = false;
+    let cD = {};
+    function updateUI(l) {
+        const t = cD.translations[l] || cD.translations['en'];
+        document.getElementById('title').innerText = t.verifyTitle;
+        document.getElementById('hero-desc').innerText = t.verifyDesc;
+        document.getElementById('status-msg').innerText = t.closedMsg;
+        const b = document.getElementById('btn-container');
+        const s = document.getElementById('apply-card');
+        if(cD.verifyProgram.applyOpen) {
+            s.classList.remove('disabled');
+            b.innerHTML = `<a href="#" class="btn btn-active">${t.applyBtn}</a>`;
+            document.getElementById('status-msg').style.display = 'none';
+        } else {
+            s.classList.add('disabled');
+            b.innerHTML = `<div class="btn btn-locked">${t.closedBtn}</div>`;
+        }
+    }
+    fetch('config.json').then(r => r.json()).then(data => {
+        cD = data; updateUI('en');
+        data.verifyProgram.list.forEach(i => {
+            document.getElementById('list-container').innerHTML += `<div class="card"><strong>${i.name}</strong><br>${i.info}</div>`;
         });
     });
 </script>
-
 </body>
 </html>

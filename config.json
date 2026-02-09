@@ -2,8 +2,18 @@
   "partnerProgram": {
     "applyOpen": false,
     "applyLink": "#",
-    "en": { "title": "Partner Program", "hero": "Grow your community with exclusive tools.", "closed_msg": "Applications are currently closed while we tidy things up." },
-    "de": { "title": "Partnerprogramm", "hero": "Lass deine Community mit exklusiven Tools wachsen.", "closed_msg": "Die Bewerbungen sind geschlossen, während wir aufräumen." },
+    "en": { 
+        "title": "Partner Program", 
+        "hero": "Grow your community with exclusive tools.", 
+        "closed_msg": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+        "btn_label": "Apply Now"
+    },
+    "de": { 
+        "title": "Partnerprogramm", 
+        "hero": "Lass deine Community mit exklusiven Tools wachsen.", 
+        "closed_msg": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später vorbei!",
+        "btn_label": "Jetzt bewerben"
+    },
     "list": [
       { "name": "Gaming Hub", "info": "150k Members" },
       { "name": "Creative Studio", "info": "Official Partner" }
@@ -12,12 +22,21 @@
   "verifyProgram": {
     "applyOpen": true,
     "applyLink": "#",
-    "en": { "title": "Verification", "hero": "Authenticity for the biggest creators.", "closed_msg": "Verification is currently paused." },
-    "de": { "title": "Verifizierung", "hero": "Authentizität für die größten Creator.", "closed_msg": "Verifizierung ist aktuell pausiert." },
+    "en": { 
+        "title": "Verification", 
+        "hero": "Authenticity for the biggest creators.", 
+        "closed_msg": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+        "btn_label": "Apply Now"
+    },
+    "de": { 
+        "title": "Verifizierung", 
+        "hero": "Authentizität für die größten Creator.", 
+        "closed_msg": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später vorbei!",
+        "btn_label": "Jetzt bewerben"
+    },
     "list": [
       { "name": "FamousStreamer", "info": "Verified Creator" },
       { "name": "MusicLabel_XYZ", "info": "Verified Organization" }
     ]
   }
 }
-

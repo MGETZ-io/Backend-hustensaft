@@ -1,39 +1,28 @@
 {
   "settings": {
-    "currentLanguage": "en"
+    "partnerApplyOpen": false,
+    "verifyApplyOpen": false
   },
   "translations": {
     "en": {
-      "partnerTitle": "PARTNER PROGRAM",
-      "verifyTitle": "VERIFY PROGRAM",
-      "closedMsg": "Our program is currently unavailable while we tidy things up on our end",
-      "partnerDesc": "We reward the best communities and creators out there.",
-      "verifyDesc": "The official verification for creators and public figures.",
-      "applyBtn": "Apply Now",
-      "closedBtn": "Applications Paused"
+      "p_title": "Hustensaft Partner Program",
+      "p_hero": "The Hustensaft Partner Program rewards the most active communities with exclusive tools and support to help them grow.",
+      "v_title": "Hustensaft Verification",
+      "v_hero": "Verified status is reserved for established content creators and public figures within the Hustensaft ecosystem.",
+      "closed_h2": "Applications are currently closed",
+      "closed_p": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+      "btn_paused": "Applications Paused",
+      "btn_apply": "Apply Now"
     },
     "de": {
-      "partnerTitle": "PARTNERPROGRAMM",
-      "verifyTitle": "VERIFIZIERUNG",
-      "closedMsg": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben.",
-      "partnerDesc": "Wir belohnen die besten Communities und Creator da draußen.",
-      "verifyDesc": "Die offizielle Verifizierung für Creator und Personen des öffentlichen Lebens.",
-      "applyBtn": "Jetzt bewerben",
-      "closedBtn": "Bewerbungen pausiert"
+      "p_title": "Hustensaft Partnerprogramm",
+      "p_hero": "Das Hustensaft Partnerprogramm belohnt die aktivsten Communities mit exklusiven Tools und Support beim Wachstum.",
+      "v_title": "Hustensaft Verifizierung",
+      "v_hero": "Der Verifizierungsstatus ist etablierten Content Creatoren und Personen des öffentlichen Lebens im Hustensaft-Ökosystem vorbehalten.",
+      "closed_h2": "Bewerbungen sind aktuell geschlossen",
+      "closed_p": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später wieder vorbei!",
+      "btn_paused": "Bewerbungen pausiert",
+      "btn_apply": "Jetzt bewerben"
     }
-  },
-  "partnerProgram": {
-    "applyOpen": true,
-    "list": [
-      { "name": "Hostvora", "info": "Official Partner" },
-      { "name": "Cubic-Network", "info": "Official Partner" }
-    ]
-  },
-  "verifyProgram": {
-    "applyOpen": false,
-    "list": [
-      { "name": "BTFM_Lucas", "info": "Verified" },
-      { "name": "Fambosyt", "info": "Verified" }
-    ]
   }
 }

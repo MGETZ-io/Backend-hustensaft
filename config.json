@@ -1,0 +1,37 @@
+{
+  "settings": {
+    "currentLanguage": "en"
+  },
+  "translations": {
+    "en": {
+      "partnerTitle": "PARTNER PROGRAM",
+      "verifyTitle": "VERIFY PROGRAM",
+      "closedMsg": "Our program is currently unavailable while we tidy things up on our end",
+      "partnerDesc": "We reward the best communities and creators out there.",
+      "verifyDesc": "The official verification for creators and public figures.",
+      "applyBtn": "Apply Now",
+      "closedBtn": "Applications Paused"
+    },
+    "de": {
+      "partnerTitle": "PARTNERPROGRAMM",
+      "verifyTitle": "VERIFIZIERUNG",
+      "closedMsg": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben.",
+      "partnerDesc": "Wir belohnen die besten Communities und Creator da draußen.",
+      "verifyDesc": "Die offizielle Verifizierung für Creator und Personen des öffentlichen Lebens.",
+      "applyBtn": "Jetzt bewerben",
+      "closedBtn": "Bewerbungen pausiert"
+    }
+  },
+  "partnerProgram": {
+    "applyOpen": false,
+    "list": [
+      { "name": "Community Alpha", "info": "Official Partner" }
+    ]
+  },
+  "verifyProgram": {
+    "applyOpen": false,
+    "list": [
+      { "name": "Creator_XY", "info": "Verified" }
+    ]
+  }
+}

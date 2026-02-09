@@ -23,15 +23,17 @@
     }
   },
   "partnerProgram": {
-    "applyOpen": false,
+    "applyOpen": true,
     "list": [
-      { "name": "Community Alpha", "info": "Official Partner" }
+      { "name": "Hostvora", "info": "Official Partner" },
+      { "name": "Cubic-Network", "info": "Official Partner" }
     ]
   },
   "verifyProgram": {
     "applyOpen": false,
     "list": [
-      { "name": "Creator_XY", "info": "Verified" }
+      { "name": "BTFM_Lucas", "info": "Verified" },
+      { "name": "Fambosyt", "info": "Verified" }
     ]
   }
 }

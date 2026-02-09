@@ -1,42 +1,22 @@
 {
   "partnerProgram": {
     "applyOpen": false,
-    "applyLink": "https://deine-url.de/partner-form",
-    "en": {
-      "title": "PARTNER PROGRAM",
-      "hero": "We reward the most active and dedicated communities with exclusive tools and support to help them thrive.",
-      "closed_h2": "Applications are currently closed",
-      "closed_p": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
-      "btn_paused": "Applications Paused",
-      "btn_apply": "Apply Now"
-    },
-    "de": {
-      "title": "PARTNERPROGRAMM",
-      "hero": "Wir belohnen die aktivsten Communities mit exklusiven Tools und Support, um ihr Wachstum zu fördern.",
-      "closed_h2": "Bewerbungen sind aktuell geschlossen",
-      "closed_p": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später wieder vorbei!",
-      "btn_paused": "Bewerbungen pausiert",
-      "btn_apply": "Jetzt bewerben"
-    }
+    "applyLink": "#",
+    "en": { "title": "Partner Program", "hero": "Grow your community with exclusive tools.", "closed_msg": "Applications are currently closed while we tidy things up." },
+    "de": { "title": "Partnerprogramm", "hero": "Lass deine Community mit exklusiven Tools wachsen.", "closed_msg": "Die Bewerbungen sind geschlossen, während wir aufräumen." },
+    "list": [
+      { "name": "Gaming Hub", "info": "150k Members" },
+      { "name": "Creative Studio", "info": "Official Partner" }
+    ]
   },
   "verifyProgram": {
-    "applyOpen": false,
-    "applyLink": "https://deine-url.de/verify-form",
-    "en": {
-      "title": "VERIFY PROGRAM",
-      "hero": "Verified status is a mark of authenticity for established content creators and public figures in our ecosystem.",
-      "closed_h2": "Verification is currently paused",
-      "closed_p": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
-      "btn_paused": "Applications Paused",
-      "btn_apply": "Request Verification"
-    },
-    "de": {
-      "title": "VERIFIZIERUNG",
-      "hero": "Der verifizierte Status ist ein Zeichen für Echtheit für etablierte Creator und Personen des öffentlichen Lebens.",
-      "closed_h2": "Verifizierung aktuell pausiert",
-      "closed_p": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später wieder vorbei!",
-      "btn_paused": "Bewerbungen pausiert",
-      "btn_apply": "Verifizierung beantragen"
-    }
+    "applyOpen": true,
+    "applyLink": "#",
+    "en": { "title": "Verification", "hero": "Authenticity for the biggest creators.", "closed_msg": "Verification is currently paused." },
+    "de": { "title": "Verifizierung", "hero": "Authentizität für die größten Creator.", "closed_msg": "Verifizierung ist aktuell pausiert." },
+    "list": [
+      { "name": "FamousStreamer", "info": "Verified Creator" },
+      { "name": "MusicLabel_XYZ", "info": "Verified Organization" }
+    ]
   }
 }

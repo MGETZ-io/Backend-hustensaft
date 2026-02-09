@@ -1,28 +1,42 @@
 {
-  "settings": {
-    "partnerApplyOpen": false,
-    "verifyApplyOpen": false
-  },
-  "translations": {
+  "partnerProgram": {
+    "applyOpen": false,
+    "applyLink": "https://deine-url.de/partner-form",
     "en": {
-      "p_title": "Hustensaft Partner Program",
-      "p_hero": "The Hustensaft Partner Program rewards the most active communities with exclusive tools and support to help them grow.",
-      "v_title": "Hustensaft Verification",
-      "v_hero": "Verified status is reserved for established content creators and public figures within the Hustensaft ecosystem.",
+      "title": "PARTNER PROGRAM",
+      "hero": "We reward the most active and dedicated communities with exclusive tools and support to help them thrive.",
       "closed_h2": "Applications are currently closed",
       "closed_p": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
       "btn_paused": "Applications Paused",
       "btn_apply": "Apply Now"
     },
     "de": {
-      "p_title": "Hustensaft Partnerprogramm",
-      "p_hero": "Das Hustensaft Partnerprogramm belohnt die aktivsten Communities mit exklusiven Tools und Support beim Wachstum.",
-      "v_title": "Hustensaft Verifizierung",
-      "v_hero": "Der Verifizierungsstatus ist etablierten Content Creatoren und Personen des öffentlichen Lebens im Hustensaft-Ökosystem vorbehalten.",
+      "title": "PARTNERPROGRAMM",
+      "hero": "Wir belohnen die aktivsten Communities mit exklusiven Tools und Support, um ihr Wachstum zu fördern.",
       "closed_h2": "Bewerbungen sind aktuell geschlossen",
       "closed_p": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später wieder vorbei!",
       "btn_paused": "Bewerbungen pausiert",
       "btn_apply": "Jetzt bewerben"
+    }
+  },
+  "verifyProgram": {
+    "applyOpen": false,
+    "applyLink": "https://deine-url.de/verify-form",
+    "en": {
+      "title": "VERIFY PROGRAM",
+      "hero": "Verified status is a mark of authenticity for established content creators and public figures in our ecosystem.",
+      "closed_h2": "Verification is currently paused",
+      "closed_p": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+      "btn_paused": "Applications Paused",
+      "btn_apply": "Request Verification"
+    },
+    "de": {
+      "title": "VERIFIZIERUNG",
+      "hero": "Der verifizierte Status ist ein Zeichen für Echtheit für etablierte Creator und Personen des öffentlichen Lebens.",
+      "closed_h2": "Verifizierung aktuell pausiert",
+      "closed_p": "Unser Programm ist derzeit nicht verfügbar, bis wir auf unserer Seite etwas aufgeräumt haben. Schau später wieder vorbei!",
+      "btn_paused": "Bewerbungen pausiert",
+      "btn_apply": "Verifizierung beantragen"
     }
   }
 }

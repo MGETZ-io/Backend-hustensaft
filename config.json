@@ -20,7 +20,7 @@
     ]
   },
   "verifyProgram": {
-    "applyOpen": true,
+    "applyOpen": false,
     "applyLink": "#",
     "en": { 
         "title": "Verification", 
@@ -35,8 +35,9 @@
         "btn_label": "Jetzt bewerben"
     },
     "list": [
-      { "name": "FamousStreamer", "info": "Verified Creator" },
-      { "name": "MusicLabel_XYZ", "info": "Verified Organization" }
+      { "name": "Hu_stensaft", "info": "Verified Creator" },
+      { "name": "Fambosyt", "info": "Verified Creator" },
+      { "name": "BTFM_Lucas", "info": "Verified Creator" }
     ]
   }
 }

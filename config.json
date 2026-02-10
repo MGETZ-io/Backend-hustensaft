@@ -5,7 +5,7 @@
     "en": { 
         "title": "Partner Program", 
         "hero": "Grow your community with exclusive tools.", 
-        "closed_msg": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+        "closed_msg": "Our program is currently unavailable while we tidy things up on our end.",
         "btn_label": "Apply Now"
     },
     "de": { 
@@ -15,8 +15,8 @@
         "btn_label": "Jetzt bewerben"
     },
     "list": [
-      { "name": "Gaming Hub", "info": "150k Members" },
-      { "name": "Creative Studio", "info": "Official Partner" }
+      { "name": "BTFM Projects", "info": "Offical Partner" },
+      { "name": "Cubic-Network", "info": "Official Partner" }
     ]
   },
   "verifyProgram": {
@@ -25,7 +25,7 @@
     "en": { 
         "title": "Verification", 
         "hero": "Authenticity for the biggest creators.", 
-        "closed_msg": "Our program is currently unavailable while we tidy things up on our end. Check back later!",
+        "closed_msg": "Our program is currently unavailable while we tidy things up on our end.",
         "btn_label": "Apply Now"
     },
     "de": { 

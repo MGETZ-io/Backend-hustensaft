@@ -1,39 +1,90 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Hustensaft System Frankfurt - Status 503</title>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #0a0a0a; 
-            color: #ffffff; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            margin: 0; 
-        }
-        .container { 
-            text-align: center; 
-            border: 1px solid #333; 
-            padding: 50px; 
-            border-radius: 8px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5); 
-        }
-        h1 { color: #d10000; font-size: 48px; margin-bottom: 10px; }
-        p { font-size: 18px; color: #bbbbbb; }
-        .brand { font-weight: bold; color: #ffffff; margin-top: 20px; letter-spacing: 1px; }
-        .footer { margin-top: 30px; font-size: 12px; color: #555; }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 503 (Service Unavailable)!!1</title>
+  <style>
+    /* Der authentische Google-Look */
+    * { margin: 0; padding: 0; }
+    html, code { font: 15px/22px arial, sans-serif; }
+    html { background: #fff; color: #222; padding: 15px; }
+    body { margin: 7% auto 0; max-width: 450px; min-height: 180px; padding: 30px 0 15px; }
+    
+    /* Branding für Ihr Imperium */
+    .brand-header { 
+      font-size: 26px; 
+      font-weight: bold; 
+      color: #4285f4; 
+      margin-bottom: 25px; 
+    }
+    
+    p { margin: 11px 0 22px; overflow: hidden; }
+    ins { color: #777; text-decoration: none; }
+    
+    /* System-Info Box */
+    .system-data {
+      background-color: #f8f9fa;
+      border: 1px solid #ebebeb;
+      padding: 15px;
+      margin-top: 25px;
+      border-radius: 4px;
+      font-size: 14px;
+      color: #555;
+    }
+    .data-label { font-weight: bold; color: #222; display: inline-block; width: 140px; }
+    
+    #clock { color: #d10000; font-family: monospace; font-weight: bold; }
+    #ip-display { font-family: monospace; color: #333; }
+
+    .tech-info { 
+      margin-top: 25px;
+      padding-top: 15px;
+      font-size: 12px;
+      color: #999;
+      border-top: 1px solid #f1f1f1;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>503</h1>
-        <h2>System vorübergehend nicht verfügbar</h2>
-        <p>Wir führen derzeit Wartungsarbeiten an der Infrastruktur durch.</p>
-        <div class="brand">HUSTENSAFT SYSTEM FRANKFURT</div>
-        <div class="footer">Verwaltet durch Hustensaft Hosting & Management</div>
-    </div>
+  <div class="brand-header">Hustensaft System Frankfurt</div>
+  
+  <p><b>503.</b> <ins>Dies ist ein Fehler.</ins></p>
+  <p>Der Dienst ist vorübergehend nicht erreichbar. Das ist alles, was wir wissen.</p>
+
+  <div class="system-data">
+    <div><span class="data-label">Systemzeit:</span> <span id="clock">--:--:--</span></div>
+    <div><span class="data-label">Aufrufende IP:</span> <span id="ip-display">Ermittle...</span></div>
+  </div>
+  
+  <div class="tech-info">
+    Verwaltet von: Hustensaft Hosting & Management<br>
+    Infrastruktur: Frankfurt am Main | Besitz: Google LLC & Hustensaft Gruppe
+  </div>
+
+  <script>
+    // 1. Live-Uhr (Sekundengenau)
+    function updateClock() {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // 2. IP-Adresse des Aufrufers via Cloud-API (JS-only Weg)
+    async function getIP() {
+      try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        document.getElementById('ip-display').textContent = data.ip;
+      } catch (error) {
+        document.getElementById('ip-display').textContent = "Lokale IP / Hidden";
+      }
+    }
+    getIP();
+  </script>
 </body>
 </html>
